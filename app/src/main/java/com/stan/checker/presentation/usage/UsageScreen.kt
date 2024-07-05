@@ -7,16 +7,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.stan.checker.ui.theme.CheckerTheme
+import com.stan.checker.ui.components.card.CheckerCard
+import com.stan.checker.ui.components.typography.CheckerText
+import com.stan.checker.ui.components.typography.TextStyle
 import com.stan.checker.usage.model.Usage
 
 @Composable
@@ -42,20 +44,26 @@ private fun UsageScreenContent(
 private fun UsageList(
     state: UsageState.UsageLoaded
 ) {
-    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        Column {
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize(),
+        containerColor = MaterialTheme.colorScheme.secondaryContainer
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier.padding(horizontal = 8.dp)
+        ) {
 
-            Greeting(
-                name = "Today's usage",
-                modifier = Modifier.padding(innerPadding)
-            )
             Spacer(modifier = Modifier.height(2.dp))
 
             LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(4.dp)
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 items(state.usageList.size) {
-                    Item(info = state.usageList[it])
+                    UsageItem(info = state.usageList[it])
+                }
+
+                item {
+                    Spacer(modifier = Modifier.height(4.dp))
                 }
             }
         }
@@ -64,31 +72,20 @@ private fun UsageList(
 
 @Composable
 private fun Loading() {
-    Greeting(name = "Loading")
+    Text(text = "Loading")
 }
 
 @Composable
-private fun Item(info: Usage) {
-    Column {
-        Text(text = "name = ${info.name ?: "Unresolved"}")
-        Text(text = "package = ${info.packageName}")
-        Spacer(modifier = Modifier.height(2.dp))
-        Text(text = "time = ${info.timeInUse / 1000} sec.")
-    }
-}
-
-@Composable
-private fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    CheckerTheme {
-        Greeting("Android")
+private fun UsageItem(
+    modifier: Modifier = Modifier,
+    info: Usage
+) {
+    CheckerCard(modifier = modifier) {
+        Column(modifier = Modifier.padding(8.dp)) {
+            CheckerText(text = "name = ${info.name ?: "Unresolved"}", style = TextStyle.Body())
+            CheckerText(text = "package = ${info.packageName}", style = TextStyle.Body())
+            Spacer(modifier = Modifier.height(2.dp))
+            CheckerText(text = "time = ${info.timeInUse / 1000} sec.", style = TextStyle.Body())
+        }
     }
 }
