@@ -13,8 +13,7 @@ class UsageViewModel @Inject constructor(
 
     override fun getInitialState() = UsageState.Loading
 
-
-    init {
+    fun getUsage() {
         val usage = usageProvider.getAllUsageForToday()
         println(usage)
         mutableUiState.update { UsageState.UsageLoaded(usage) }

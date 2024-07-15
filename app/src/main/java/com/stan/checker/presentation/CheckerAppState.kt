@@ -11,6 +11,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.stan.checker.core.navigation.BottomBarScreen
 import com.stan.checker.core.navigation.getHomeDestinations
+import com.stan.checker.presentation.todo.ROUTE_TODO
+import com.stan.checker.presentation.todo.navigateToTodo
 import com.stan.checker.presentation.usage.ROUTE_USAGE
 import com.stan.checker.presentation.usage.navigateToUsage
 
@@ -35,6 +37,7 @@ class CheckerAppState(
     val currentBottomBarDestination: BottomBarScreen?
         @Composable get() = when (currentDestination?.route) {
             ROUTE_USAGE -> BottomBarScreen.Usage
+            ROUTE_TODO -> BottomBarScreen.TodoList
             else -> null
         }
 
@@ -60,8 +63,7 @@ class CheckerAppState(
 
         when (bottomBarScreen) {
             BottomBarScreen.Usage -> navController.navigateToUsage(bottomBarScreenNavOptions)
-            // TODO change to todo
-            BottomBarScreen.TodoList -> navController.navigateToUsage(bottomBarScreenNavOptions)
+            BottomBarScreen.TodoList -> navController.navigateToTodo(bottomBarScreenNavOptions)
         }
     }
 

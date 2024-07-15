@@ -5,7 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 
-const val ROUTE_USAGE = "ROUTE_TODAY"
+const val ROUTE_USAGE = "ROUTE_USAGE"
 
 fun NavController.navigateToUsage(navOptions: NavOptions? = null) {
     this.navigate(ROUTE_USAGE, navOptions)
