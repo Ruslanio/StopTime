@@ -6,6 +6,7 @@ import androidx.compose.material.icons.rounded.List
 import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.stan.checker.R
+import com.stan.checker.presentation.todo.ROUTE_TODO
 import com.stan.checker.presentation.usage.ROUTE_USAGE
 
 private const val ROUTE_IN_PROGRESS = "IN_PROGRESS"
@@ -22,7 +23,7 @@ sealed class BottomBarScreen(
     )
 
     data object TodoList : BottomBarScreen(
-        ROUTE_IN_PROGRESS,
+        ROUTE_TODO,
         Icons.Rounded.List,
         R.string.category_title_todo
     )

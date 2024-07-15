@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.serialization)
 //    alias(libs.plugins.room)  Disabled this unconfigurable abomination of satan for now
 }
 
@@ -56,16 +57,22 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splash)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.compose)
     implementation(libs.androidx.lifecycle.composeVM)
+    implementation(libs.kotlin.serialization)
+
+    implementation(libs.navigation.compose)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    implementation(libs.accomponist.permission)
 
     implementation(libs.hilt)
     implementation(libs.hilt.navigation)

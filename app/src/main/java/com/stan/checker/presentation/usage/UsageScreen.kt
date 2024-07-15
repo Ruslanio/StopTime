@@ -1,5 +1,7 @@
 package com.stan.checker.presentation.usage
 
+import android.content.Intent
+import android.provider.Settings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -13,10 +15,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.stan.checker.ext.checkPackagesPermission
 import com.stan.checker.ui.components.card.CheckerCard
+import com.stan.checker.ui.components.permission.RequestPermission
 import com.stan.checker.ui.components.typography.CheckerText
 import com.stan.checker.ui.components.typography.TextStyle
 import com.stan.checker.usage.model.Usage
@@ -27,15 +32,16 @@ fun UsageScreen(
 ) {
     val usageState: UsageState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    UsageScreenContent(state = usageState)
+    UsageScreenContent(state = usageState, fetchForUsage = viewModel::getUsage)
 }
 
 @Composable
 private fun UsageScreenContent(
-    state: UsageState
+    state: UsageState,
+    fetchForUsage: () -> Unit
 ) {
     when (state) {
-        UsageState.Loading -> Loading()
+        UsageState.Loading -> Loading(fetchForUsage)
         is UsageState.UsageLoaded -> UsageList(state = state)
     }
 }
@@ -71,8 +77,24 @@ private fun UsageList(
 }
 
 @Composable
-private fun Loading() {
-    Text(text = "Loading")
+private fun Loading(
+    fetchForUsage: () -> Unit
+) {
+    Column {
+        Text(text = "Loading")
+
+        val isPermissionProvided = LocalContext.current.checkPackagesPermission()
+        if (isPermissionProvided.not()) {
+            RequestPermission(
+                permissionIntent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS),
+                onResult = {
+                    fetchForUsage.invoke()
+                }
+            )
+        } else {
+            fetchForUsage.invoke()
+        }
+    }
 }
 
 @Composable

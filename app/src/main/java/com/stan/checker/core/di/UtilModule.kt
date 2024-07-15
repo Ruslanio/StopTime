@@ -12,7 +12,7 @@ import dagger.hilt.components.SingletonComponent
 object UtilModule {
 
     @Provides
-    fun proveDateManager(): DateManager {
+    fun provideDateManager(): DateManager {
         return DateManagerImpl()
     }
 }
