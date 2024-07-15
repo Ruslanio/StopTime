@@ -1,13 +1,18 @@
-package com.stan.checker.usage
+package com.stan.checker.data.repository
 
 import android.app.usage.UsageStatsManager
+import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
+import com.stan.checker.usage.DateManager
+import com.stan.checker.usage.NamingHelper
 import com.stan.checker.usage.model.Usage
 
-class UsageProviderImpl(
+class UsageRepositoryImpl(
     private val usageManager: UsageStatsManager,
+    private val packageManager: PackageManager,
     private val dateManager: DateManager,
     private val namingHelper: NamingHelper
-) : UsageProvider {
+) : UsageRepository {
 
     override fun getAllUsageForToday(): List<Usage> {
         val stats = usageManager.queryAndAggregateUsageStats(
@@ -19,11 +24,17 @@ class UsageProviderImpl(
 
         return stats.map {
             Usage(
+                icon = getIconDrawable(it.packageName),
                 name = namingHelper.resolvePackageName(it.packageName) ?: it.packageName,
                 packageName = it.packageName,
                 timeInUse = it.totalTimeInForeground
             )
         }
+    }
+
+    private fun getIconDrawable(packageName: String): Drawable? {
+        val result = runCatching { packageManager.getApplicationIcon(packageName) }
+        return result.getOrNull()
     }
 
 }
