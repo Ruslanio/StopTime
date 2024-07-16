@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.androidx.material3)
 
     implementation(libs.accomponist.permission)
+    implementation(libs.accomponist.drawablepainter)
 
     implementation(libs.hilt)
     implementation(libs.hilt.navigation)
