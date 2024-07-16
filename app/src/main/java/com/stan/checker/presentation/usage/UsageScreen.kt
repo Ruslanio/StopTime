@@ -3,6 +3,7 @@ package com.stan.checker.presentation.usage
 import android.content.Intent
 import android.provider.Settings
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,7 +16,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -59,27 +59,25 @@ private fun UsageScreenContent(
 private fun UsageList(
     state: UsageState.UsageLoaded
 ) {
-    Scaffold(
+    Column(
         modifier = Modifier
-            .fillMaxSize(),
-        containerColor = MaterialTheme.colorScheme.secondaryContainer
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier.padding(horizontal = 8.dp)
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.secondaryContainer)
+            .padding(horizontal = 8.dp)
+    ) {
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
+            item {
+                Spacer(modifier = Modifier.height(4.dp))
+            }
 
-            Spacer(modifier = Modifier.height(2.dp))
+            items(state.usageList.size) {
+                UsageItem(info = state.usageList[it])
+            }
 
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-                items(state.usageList.size) {
-                    UsageItem(info = state.usageList[it])
-                }
-
-                item {
-                    Spacer(modifier = Modifier.height(4.dp))
-                }
+            item {
+                Spacer(modifier = Modifier.height(4.dp))
             }
         }
     }
@@ -115,7 +113,10 @@ private fun UsageItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(
+                    horizontal = 12.dp,
+                    vertical = 8.dp
+                ),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
@@ -131,13 +132,12 @@ private fun UsageItem(
                 contentDescription = ""
             )
 
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(12.dp))
 
             Column {
-                CheckerText(text = "name = ${info.name ?: "Unresolved"}", style = TextStyle.Body())
-                CheckerText(text = "package = ${info.packageName}", style = TextStyle.Body())
+                CheckerText(text = info.name, style = TextStyle.Body())
                 Spacer(modifier = Modifier.height(2.dp))
-                CheckerText(text = "time = ${info.timeInUse / 1000} sec.", style = TextStyle.Body())
+                CheckerText(text = "${info.timeInUse / 1000} sec.", style = TextStyle.Body())
             }
         }
     }

@@ -4,14 +4,12 @@ import android.app.usage.UsageStatsManager
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import com.stan.checker.usage.DateManager
-import com.stan.checker.usage.NamingHelper
 import com.stan.checker.usage.model.Usage
 
 class UsageRepositoryImpl(
     private val usageManager: UsageStatsManager,
     private val packageManager: PackageManager,
     private val dateManager: DateManager,
-    private val namingHelper: NamingHelper
 ) : UsageRepository {
 
     override fun getAllUsageForToday(): List<Usage> {
@@ -25,7 +23,7 @@ class UsageRepositoryImpl(
         return stats.map {
             Usage(
                 icon = getIconDrawable(it.packageName),
-                name = namingHelper.resolvePackageName(it.packageName) ?: it.packageName,
+                name = getApplicationLabel(it.packageName),
                 packageName = it.packageName,
                 timeInUse = it.totalTimeInForeground
             )
@@ -37,4 +35,9 @@ class UsageRepositoryImpl(
         return result.getOrNull()
     }
 
+    private fun getApplicationLabel(packageName: String): String {
+        return packageManager.getApplicationLabel(
+            packageManager.getApplicationInfo(packageName, 0)
+        ).toString()
+    }
 }
