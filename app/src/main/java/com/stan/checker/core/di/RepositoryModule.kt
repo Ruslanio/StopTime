@@ -4,7 +4,7 @@ import com.stan.checker.data.datasource.AppInfoDataSource
 import com.stan.checker.data.datasource.UsageDataSource
 import com.stan.checker.data.repository.UsageRepository
 import com.stan.checker.data.repository.UsageRepositoryImpl
-import com.stan.checker.usage.DateManager
+import com.stan.checker.util.DateManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

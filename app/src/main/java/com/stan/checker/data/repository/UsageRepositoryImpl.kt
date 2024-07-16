@@ -2,8 +2,8 @@ package com.stan.checker.data.repository
 
 import com.stan.checker.data.datasource.AppInfoDataSource
 import com.stan.checker.data.datasource.UsageDataSource
-import com.stan.checker.usage.DateManager
-import com.stan.checker.usage.model.Usage
+import com.stan.checker.presentation.model.Usage
+import com.stan.checker.util.DateManager
 
 class UsageRepositoryImpl(
     private val usageDataSource: UsageDataSource,

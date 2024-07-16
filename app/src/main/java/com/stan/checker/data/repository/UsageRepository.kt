@@ -1,6 +1,6 @@
 package com.stan.checker.data.repository
 
-import com.stan.checker.usage.model.Usage
+import com.stan.checker.presentation.model.Usage
 
 interface UsageRepository {
 

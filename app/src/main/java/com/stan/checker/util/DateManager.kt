@@ -1,4 +1,4 @@
-package com.stan.checker.usage
+package com.stan.checker.util
 
 interface DateManager {
     fun getStartOfDayTimeMillis(): Long

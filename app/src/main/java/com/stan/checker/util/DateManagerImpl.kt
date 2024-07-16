@@ -1,4 +1,4 @@
-package com.stan.checker.usage
+package com.stan.checker.util
 
 import java.time.LocalDate
 import java.time.ZoneId
