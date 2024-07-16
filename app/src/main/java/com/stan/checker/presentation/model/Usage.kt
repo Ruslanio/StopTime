@@ -1,4 +1,4 @@
-package com.stan.checker.usage.model
+package com.stan.checker.presentation.model
 
 import android.graphics.drawable.Drawable
 

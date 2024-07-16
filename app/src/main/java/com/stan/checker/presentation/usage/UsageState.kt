@@ -1,7 +1,7 @@
 package com.stan.checker.presentation.usage
 
 import com.stan.checker.core.mvvm.BaseState
-import com.stan.checker.usage.model.Usage
+import com.stan.checker.presentation.model.Usage
 
 sealed class UsageState : BaseState {
 

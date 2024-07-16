@@ -1,43 +1,29 @@
 package com.stan.checker.data.repository
 
-import android.app.usage.UsageStatsManager
-import android.content.pm.PackageManager
-import android.graphics.drawable.Drawable
-import com.stan.checker.usage.DateManager
-import com.stan.checker.usage.model.Usage
+import com.stan.checker.data.datasource.AppInfoDataSource
+import com.stan.checker.data.datasource.UsageDataSource
+import com.stan.checker.presentation.model.Usage
+import com.stan.checker.util.DateManager
 
 class UsageRepositoryImpl(
-    private val usageManager: UsageStatsManager,
-    private val packageManager: PackageManager,
+    private val usageDataSource: UsageDataSource,
+    private val appInfoDataSource: AppInfoDataSource,
     private val dateManager: DateManager,
 ) : UsageRepository {
 
     override fun getAllUsageForToday(): List<Usage> {
-        val stats = usageManager.queryAndAggregateUsageStats(
+        val stats = usageDataSource.queryUsageStats(
             dateManager.getStartOfDayTimeMillis(),
             dateManager.getCurrentTimeMillis()
-        ).values.toList()
-            .sortedByDescending { it.totalTimeInForeground }
-            .filter { it.totalTimeInForeground / 1000 != 0L }
+        ).sortedByDescending { it.usageTimestamp }
 
         return stats.map {
             Usage(
-                icon = getIconDrawable(it.packageName),
-                name = getApplicationLabel(it.packageName),
+                icon = appInfoDataSource.getApplicationIcon(it.packageName),
+                name = appInfoDataSource.getApplicationLabel(it.packageName),
                 packageName = it.packageName,
-                timeInUse = it.totalTimeInForeground
+                timeInUse = it.usageTimestamp
             )
         }
-    }
-
-    private fun getIconDrawable(packageName: String): Drawable? {
-        val result = runCatching { packageManager.getApplicationIcon(packageName) }
-        return result.getOrNull()
-    }
-
-    private fun getApplicationLabel(packageName: String): String {
-        return packageManager.getApplicationLabel(
-            packageManager.getApplicationInfo(packageName, 0)
-        ).toString()
     }
 }

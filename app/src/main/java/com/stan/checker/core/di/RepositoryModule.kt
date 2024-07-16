@@ -1,10 +1,10 @@
 package com.stan.checker.core.di
 
-import android.app.usage.UsageStatsManager
-import android.content.pm.PackageManager
+import com.stan.checker.data.datasource.AppInfoDataSource
+import com.stan.checker.data.datasource.UsageDataSource
 import com.stan.checker.data.repository.UsageRepository
 import com.stan.checker.data.repository.UsageRepositoryImpl
-import com.stan.checker.usage.DateManager
+import com.stan.checker.util.DateManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,18 +12,18 @@ import dagger.hilt.components.SingletonComponent
 
 @InstallIn(SingletonComponent::class)
 @Module
-object DataModule {
+object RepositoryModule {
 
     @Provides
     fun provideUsageRepository(
-        usageStatsManager: UsageStatsManager,
+        usageDataSource: UsageDataSource,
         dateManager: DateManager,
-        packageManager: PackageManager
+        appInfoDataSource: AppInfoDataSource
     ): UsageRepository {
         return UsageRepositoryImpl(
-            usageManager = usageStatsManager,
+            usageDataSource = usageDataSource,
             dateManager = dateManager,
-            packageManager = packageManager
+            appInfoDataSource = appInfoDataSource
         )
     }
 }
