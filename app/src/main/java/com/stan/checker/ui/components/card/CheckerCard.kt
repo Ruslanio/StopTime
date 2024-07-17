@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun CheckerCard(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     cornerRadius: Dp = 10.dp,
     cardElevation: CardElevation = CardDefaults.cardElevation(4.dp),
     content: @Composable ColumnScope.() -> Unit

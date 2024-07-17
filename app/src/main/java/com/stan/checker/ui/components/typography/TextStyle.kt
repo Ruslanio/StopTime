@@ -30,6 +30,36 @@ sealed class TextStyle(
 
         override val color @Composable get() = MaterialTheme.colorScheme.onSurface
     }
+
+    class Error(
+        weight: TextWeight = TextWeight.NORMAL,
+        alignment: TextAlign = TextAlign.Start,
+        textDecoration: TextDecoration = TextDecoration.None
+    ) : TextStyle(weight, alignment, textDecoration) {
+        override val fontSize @Composable get() = 14.sp
+
+        override val color @Composable get() = MaterialTheme.colorScheme.error
+    }
+
+    class Heading(
+        weight: TextWeight = TextWeight.BOLD,
+        alignment: TextAlign = TextAlign.Start,
+        textDecoration: TextDecoration = TextDecoration.None
+    ) : TextStyle(weight, alignment, textDecoration) {
+        override val fontSize @Composable get() = 18.sp
+
+        override val color @Composable get() = MaterialTheme.colorScheme.onSurface
+    }
+
+    class HeadingSmall(
+        weight: TextWeight = TextWeight.MEDIUM,
+        alignment: TextAlign = TextAlign.Start,
+        textDecoration: TextDecoration = TextDecoration.None
+    ) : TextStyle(weight, alignment, textDecoration) {
+        override val fontSize @Composable get() = 16.sp
+
+        override val color @Composable get() = MaterialTheme.colorScheme.onSurface
+    }
 }
 
 enum class TextWeight(val value: FontWeight) {
