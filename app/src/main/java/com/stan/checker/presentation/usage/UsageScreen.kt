@@ -29,7 +29,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import com.stan.checker.R
 import com.stan.checker.ext.checkPackagesPermission
-import com.stan.checker.presentation.model.Usage
+import com.stan.checker.presentation.model.UsageItem
 import com.stan.checker.ui.components.card.CheckerCard
 import com.stan.checker.ui.components.permission.RequestPermission
 import com.stan.checker.ui.components.typography.CheckerText
@@ -107,7 +107,7 @@ private fun Loading(
 @Composable
 private fun UsageItem(
     modifier: Modifier = Modifier,
-    info: Usage
+    info: UsageItem
 ) {
     CheckerCard(modifier = modifier) {
         Row(

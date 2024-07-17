@@ -2,8 +2,8 @@ package com.stan.checker.data.repository
 
 import com.stan.checker.data.datasource.AppInfoDataSource
 import com.stan.checker.data.datasource.UsageDataSource
-import com.stan.checker.presentation.model.Usage
-import com.stan.checker.util.DateManager
+import com.stan.checker.presentation.model.UsageItem
+import com.stan.checker.util.date.DateManager
 
 class UsageRepositoryImpl(
     private val usageDataSource: UsageDataSource,
@@ -11,14 +11,14 @@ class UsageRepositoryImpl(
     private val dateManager: DateManager,
 ) : UsageRepository {
 
-    override fun getAllUsageForToday(): List<Usage> {
+    override fun getAllUsageForToday(): List<UsageItem> {
         val stats = usageDataSource.queryUsageStats(
             dateManager.getStartOfDayTimeMillis(),
             dateManager.getCurrentTimeMillis()
         ).sortedByDescending { it.usageTimestamp }
 
         return stats.map {
-            Usage(
+            UsageItem(
                 icon = appInfoDataSource.getApplicationIcon(it.packageName),
                 name = appInfoDataSource.getApplicationLabel(it.packageName),
                 packageName = it.packageName,

@@ -1,8 +1,8 @@
 package com.stan.checker.data.repository
 
-import com.stan.checker.presentation.model.Usage
+import com.stan.checker.presentation.model.UsageItem
 
 interface UsageRepository {
 
-    fun getAllUsageForToday(): List<Usage>
+    fun getAllUsageForToday(): List<UsageItem>
 }

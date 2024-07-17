@@ -3,4 +3,13 @@
 
     <string name="category_title_usage">Usage</string>
     <string name="category_title_todo">Todo</string>
+    <string name="error_generic_message">Error</string>
+    <string name="task_list_empty_warning">No tasks found</string>
+    <string name="error_generic_action_title">Something went wrong</string>
+    <string name="task_list_completed">Completed</string>
+    <string name="task_list_expired">Expired</string>
+    <string name="task_list_perpetual">Prepetual</string>
+    <string name="task_list_today">Today</string>
+    <string name="task_list_tomorrow">Tomorrow</string>
+    <string name="task_list_nearest_future">Nearest future</string>
 </resources>
