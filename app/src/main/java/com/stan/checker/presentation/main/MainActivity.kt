@@ -6,9 +6,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.stan.checker.ext.checkPackagesPermission
 import com.stan.checker.presentation.app.CheckerApp
+import com.stan.checker.presentation.app.LocalActivityStoreProvider
 import com.stan.checker.ui.theme.CheckerTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,8 +34,10 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
         setContent {
-            CheckerTheme {
-                CheckerApp(isPermissionProvided = checkPackagesPermission())
+            CompositionLocalProvider(LocalActivityStoreProvider provides this) {
+                CheckerTheme {
+                    CheckerApp(isPermissionProvided = checkPackagesPermission())
+                }
             }
         }
     }

@@ -30,6 +30,7 @@ import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import com.stan.checker.R
 import com.stan.checker.ext.checkPackagesPermission
 import com.stan.checker.presentation.app.FabViewModel
+import com.stan.checker.presentation.app.fabViewModel
 import com.stan.checker.presentation.model.UsageItem
 import com.stan.checker.ui.components.card.CheckerCard
 import com.stan.checker.ui.components.permission.RequestPermission
@@ -38,7 +39,7 @@ import com.stan.checker.ui.components.typography.TextStyle
 
 @Composable
 fun UsageScreen(
-    fabViewModel: FabViewModel,
+    fabViewModel: FabViewModel = fabViewModel(),
     viewModel: UsageViewModel = hiltViewModel()
 ) {
     val usageState: UsageState by viewModel.uiState.collectAsStateWithLifecycle()

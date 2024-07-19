@@ -32,11 +32,8 @@ fun CheckerNavHost(
         )
 
         homeGraph {
-            usageScreen(
-                fabViewModel = fabViewModel,
-            )
+            usageScreen()
             taskListGraph(
-                fabViewModel = fabViewModel,
                 navigateToTaskCreation = {},
                 navigateToTaskEdit = {},
                 nestedGraph = {}

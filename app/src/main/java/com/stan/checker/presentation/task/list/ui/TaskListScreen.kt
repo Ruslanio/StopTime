@@ -29,6 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.stan.checker.R
 import com.stan.checker.presentation.app.FabViewModel
+import com.stan.checker.presentation.app.fabViewModel
 import com.stan.checker.presentation.model.TaskItem
 import com.stan.checker.presentation.task.list.TaskListState
 import com.stan.checker.presentation.task.list.TaskListViewModel
@@ -42,7 +43,7 @@ import com.stan.checker.ui.ext.isScrollingUp
 @Composable
 fun TaskListScreen(
     viewModel: TaskListViewModel = hiltViewModel(),
-    fabViewModel: FabViewModel,
+    fabViewModel: FabViewModel = fabViewModel(),
     navigateToTaskCreation: () -> Unit,
     navigateToTaskEdit: (taskId: Int) -> Unit
 ) {

@@ -5,7 +5,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.navigation
 import com.stan.checker.core.navigation.composableNoAnim
-import com.stan.checker.presentation.app.FabViewModel
 import com.stan.checker.presentation.task.list.ui.TaskListScreen
 
 const val GRAPH_ROUTE_TASK_LIST = "GRAPH_ROUTE_TASK_LIST"
@@ -16,7 +15,6 @@ fun NavController.navigateToTaskList(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.taskListGraph(
-    fabViewModel: FabViewModel,
     navigateToTaskCreation: () -> Unit,
     navigateToTaskEdit: (taskId: Int) -> Unit,
     nestedGraph: NavGraphBuilder.() -> Unit
@@ -27,7 +25,6 @@ fun NavGraphBuilder.taskListGraph(
     ) {
         composableNoAnim(route = ROUTE_TASK_LIST) {
             TaskListScreen(
-                fabViewModel = fabViewModel,
                 navigateToTaskCreation = navigateToTaskCreation,
                 navigateToTaskEdit = navigateToTaskEdit
             )
