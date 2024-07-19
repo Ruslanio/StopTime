@@ -1,4 +1,4 @@
-package com.stan.checker.presentation
+package com.stan.checker.presentation.app
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -19,10 +19,10 @@ import com.stan.checker.presentation.usage.navigateToUsage
 @Composable
 fun rememberCheckerState(
     navController: NavHostController = rememberNavController()
-) : CheckerAppState {
-     return remember(navController) {
-         CheckerAppState(navController)
-     }
+): CheckerAppState {
+    return remember(navController) {
+        CheckerAppState(navController)
+    }
 }
 
 @Stable

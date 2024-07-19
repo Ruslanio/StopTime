@@ -1,28 +1,20 @@
 package com.stan.checker.presentation.task.list.ui
 
 import androidx.annotation.StringRes
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.stan.checker.R
+import com.stan.checker.presentation.app.FabViewModel
 import com.stan.checker.presentation.model.TaskItem
 import com.stan.checker.presentation.task.list.TaskListState
 import com.stan.checker.presentation.task.list.TaskListViewModel
@@ -49,6 +42,7 @@ import com.stan.checker.ui.ext.isScrollingUp
 @Composable
 fun TaskListScreen(
     viewModel: TaskListViewModel = hiltViewModel(),
+    fabViewModel: FabViewModel,
     navigateToTaskCreation: () -> Unit,
     navigateToTaskEdit: (taskId: Int) -> Unit
 ) {
@@ -56,6 +50,7 @@ fun TaskListScreen(
 
     TaskListContent(
         taskListState = taskListState,
+        fabViewModel = fabViewModel,
         tryToRefresh = viewModel::tryToRefresh,
         navigateToTaskCreation = navigateToTaskCreation,
         onTaskCompletionStateChange = viewModel::onTaskCompletionStatusChange,
@@ -67,6 +62,7 @@ fun TaskListScreen(
 @Composable
 private fun TaskListContent(
     taskListState: TaskListState,
+    fabViewModel: FabViewModel,
     tryToRefresh: () -> Unit,
     onDeleteTask: (taskId: Int) -> Unit,
     onTaskEditClick: (taskId: Int) -> Unit,
@@ -75,56 +71,27 @@ private fun TaskListContent(
 ) {
     val listState = rememberLazyListState()
 
-    Scaffold(
-        floatingActionButton = {
-            if (taskListState.isTaskCreationPossible()) {
-                TaskFAB(
-                    isVisible = listState.isScrollingUp(),
-                    navigateToTaskCreation = navigateToTaskCreation
-                )
-            }
-        },
-        modifier = Modifier.background(color = MaterialTheme.colorScheme.surfaceVariant)
-    ) { padding ->
-        Column(
-            modifier = Modifier.padding(padding)
-        ) {
-            when (taskListState) {
-                is TaskListState.Loading -> Loading()
-                is TaskListState.HasTasksState -> TasksList(
-                    listState = listState,
-                    taskList = taskListState.taskList,
-                    onTaskCompletionStateChange = onTaskCompletionStateChange,
-                    onTaskEditClick = onTaskEditClick,
-                    onDeleteTask = onDeleteTask
-                )
-
-                is TaskListState.NoTasks -> NoTasks()
-                is TaskListState.Error -> TasksError(taskListState.errorMessageId, tryToRefresh)
-            }
-        }
+    fabViewModel.isVisible.value = listState.isScrollingUp().value
+    fabViewModel.onClickAction.value = {
+        //TODO go to task creation
     }
-}
 
-@Composable
-private fun TaskFAB(
-    isVisible: Boolean,
-    navigateToTaskCreation: () -> Unit
-) {
-    AnimatedVisibility(
-        visible = isVisible,
-        enter = slideInVertically { it * 2 },
-        exit = slideOutVertically { it * 2 }
+    Column(
+        modifier = Modifier
+            .background(color = MaterialTheme.colorScheme.surfaceVariant)
     ) {
-        FloatingActionButton(
-            onClick = { navigateToTaskCreation.invoke() },
-            containerColor = MaterialTheme.colorScheme.primary
-        ) {
-            Icon(
-                Icons.Rounded.Add,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onPrimary
+        when (taskListState) {
+            is TaskListState.Loading -> Loading()
+            is TaskListState.HasTasksState -> TasksList(
+                listState = listState,
+                taskList = taskListState.taskList,
+                onTaskCompletionStateChange = onTaskCompletionStateChange,
+                onTaskEditClick = onTaskEditClick,
+                onDeleteTask = onDeleteTask
             )
+
+            is TaskListState.NoTasks -> NoTasks()
+            is TaskListState.Error -> TasksError(taskListState.errorMessageId, tryToRefresh)
         }
     }
 }

@@ -8,7 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.stan.checker.ext.checkPackagesPermission
-import com.stan.checker.presentation.CheckerApp
+import com.stan.checker.presentation.app.CheckerApp
 import com.stan.checker.ui.theme.CheckerTheme
 import dagger.hilt.android.AndroidEntryPoint
 
