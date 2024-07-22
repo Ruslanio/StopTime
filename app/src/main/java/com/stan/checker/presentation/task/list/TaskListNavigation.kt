@@ -3,8 +3,8 @@ package com.stan.checker.presentation.task.list
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.stan.checker.core.navigation.composableNoAnim
 import com.stan.checker.presentation.task.list.ui.TaskListScreen
 
 const val GRAPH_ROUTE_TASK_LIST = "GRAPH_ROUTE_TASK_LIST"
@@ -23,7 +23,7 @@ fun NavGraphBuilder.taskListGraph(
         route = GRAPH_ROUTE_TASK_LIST,
         startDestination = ROUTE_TASK_LIST
     ) {
-        composable(route = ROUTE_TASK_LIST) {
+        composableNoAnim(route = ROUTE_TASK_LIST) {
             TaskListScreen(
                 navigateToTaskCreation = navigateToTaskCreation,
                 navigateToTaskEdit = navigateToTaskEdit
