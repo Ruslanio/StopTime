@@ -2,14 +2,15 @@ package com.stan.checker.data.datasource
 
 import android.app.usage.UsageStats
 import android.app.usage.UsageStatsManager
+import android.app.usage.UsageStatsManager.INTERVAL_DAILY
 import com.stan.checker.data.model.UsageStatEntity
 
 class UsageDataSourceImpl(
     private val usageStatsManager: UsageStatsManager
 ) : UsageDataSource {
 
-    override fun queryUsageStats(beginTime: Long, endTime: Long): List<UsageStatEntity> {
-        return usageStatsManager.queryAndAggregateUsageStats(beginTime, endTime).values
+    override fun queryDailyUsageStats(beginTime: Long, endTime: Long): List<UsageStatEntity> {
+        return usageStatsManager.queryUsageStats(INTERVAL_DAILY, beginTime, endTime)
             .filter { it.totalTimeInForeground / 1000 != 0L }
             .map { it.toEntity() }
     }

@@ -12,7 +12,7 @@ class UsageRepositoryImpl(
 ) : UsageRepository {
 
     override fun getAllUsageForToday(): List<UsageItem> {
-        val stats = usageDataSource.queryUsageStats(
+        val stats = usageDataSource.queryDailyUsageStats(
             dateManager.getStartOfDayTimeMillis(),
             dateManager.getCurrentTimeMillis()
         ).sortedByDescending { it.usageTimestamp }
@@ -22,7 +22,7 @@ class UsageRepositoryImpl(
                 icon = appInfoDataSource.getApplicationIcon(it.packageName),
                 name = appInfoDataSource.getApplicationLabel(it.packageName),
                 packageName = it.packageName,
-                timeInUse = it.usageTimestamp
+                timeInUse = dateManager.mapTimestampsToPrettyString(it.usageTimestamp)
             )
         }
     }

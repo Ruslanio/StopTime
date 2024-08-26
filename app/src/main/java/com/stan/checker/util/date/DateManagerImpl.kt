@@ -1,6 +1,8 @@
 package com.stan.checker.util.date
 
+import com.stan.checker.R
 import com.stan.checker.presentation.model.DateStatus
+import com.stan.checker.util.resourse.ResourceProvider
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -8,7 +10,9 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
-class DateManagerImpl : DateManager {
+class DateManagerImpl(
+    private val resourceProvider: ResourceProvider
+) : DateManager {
 
     override fun parseToDate(string: String, formatter: DateTimeFormatter): LocalDate {
         return LocalDate.parse(string, formatter)
@@ -22,8 +26,8 @@ class DateManagerImpl : DateManager {
         return LocalTime.parse(string, formatter)
     }
 
-    override fun parseToString(date: LocalTime, formatter: DateTimeFormatter): String {
-        return date.format(formatter)
+    override fun parseToString(time: LocalTime, formatter: DateTimeFormatter): String {
+        return time.format(formatter)
     }
 
     override fun getStartOfDayTimeMillis(): Long {
@@ -72,6 +76,32 @@ class DateManagerImpl : DateManager {
             date != null && time == null -> date.atStartOfDay()
             else -> null
         }
+    }
+
+    override fun mapTimestampsToPrettyString(timestamp: Long): String {
+        val seconds = (timestamp / 1000) % 60
+        val minutes = (timestamp / (1000 * 60)) % 60
+        val hours = (timestamp / (1000 * 60 * 60)) % 24
+
+        val result = StringBuilder()
+
+        if (hours > 0) {
+            result.append(hours)
+                .append(" ")
+                .append(resourceProvider.getString(R.string.time_hours_short))
+                .append(" ")
+        }
+        if (minutes > 0) {
+            result.append(minutes)
+                .append(" ")
+                .append(resourceProvider.getString(R.string.time_minutes_short))
+                .append(" ")
+        }
+        result.append(seconds)
+            .append(" ")
+            .append(resourceProvider.getString(R.string.time_seconds_short))
+
+        return result.toString()
     }
 
     private fun LocalDate.isExpired(): Boolean {

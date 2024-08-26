@@ -6,5 +6,5 @@ data class UsageItem(
     val icon: Drawable?,
     val name: String,
     val packageName: String,
-    val timeInUse: Long
+    val timeInUse: String
 )

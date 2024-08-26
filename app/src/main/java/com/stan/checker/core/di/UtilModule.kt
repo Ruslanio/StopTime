@@ -25,7 +25,9 @@ object UtilModule {
     }
 
     @Provides
-    fun provideDateManager(): DateManager {
-        return DateManagerImpl()
+    fun provideDateManager(
+        resourceProvider: ResourceProvider
+    ): DateManager {
+        return DateManagerImpl(resourceProvider)
     }
 }
