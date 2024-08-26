@@ -137,7 +137,7 @@ private fun UsageItem(
             Column {
                 CheckerText(text = info.name, style = TextStyle.Body())
                 Spacer(modifier = Modifier.height(2.dp))
-                CheckerText(text = "${info.timeInUse / 1000} sec.", style = TextStyle.Body())
+                CheckerText(text = info.timeInUse, style = TextStyle.Body())
             }
         }
     }

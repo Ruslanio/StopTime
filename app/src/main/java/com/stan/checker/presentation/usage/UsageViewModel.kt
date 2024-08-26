@@ -15,7 +15,6 @@ class UsageViewModel @Inject constructor(
 
     fun getUsage() {
         val usage = usageRepository.getAllUsageForToday()
-        println(usage)
         mutableUiState.update { UsageState.UsageLoaded(usage) }
     }
 }

@@ -10,7 +10,6 @@ object Formatters {
 
     object Time {
         val dbConverter = DateTimeFormatter.ofPattern("HH:mm")
-        val uiFriendly = DateTimeFormatter.ofPattern("HH:mm")
-    }
+        val uiFriendly = DateTimeFormatter.ofPattern("HH:mm") }
 }
 

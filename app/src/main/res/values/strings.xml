@@ -12,4 +12,7 @@
     <string name="task_list_today">Today</string>
     <string name="task_list_tomorrow">Tomorrow</string>
     <string name="task_list_nearest_future">Nearest future</string>
+    <string name="time_hours_short">hr</string>
+    <string name="time_minutes_short">min</string>
+    <string name="time_seconds_short">sec</string>
 </resources>
