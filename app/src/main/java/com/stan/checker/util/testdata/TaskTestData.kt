@@ -189,6 +189,30 @@ object TaskTestData {
             LocalTime.now(),
             false
         ),
+        TaskEntity(
+            id = 7,
+            "Don't be a fool",
+            "You knew that day would come",
+            LocalDate.now().plusMonths(1).plusDays(3),
+            LocalTime.now(),
+            false
+        ),
+        TaskEntity(
+            id = 8,
+            "Don't be a fool",
+            "You knew that day would come",
+            LocalDate.now().plusMonths(1).plusDays(1),
+            LocalTime.now(),
+            false
+        ),
+        TaskEntity(
+            id = 9,
+            "Don't be a fool",
+            "You knew that day would come",
+            LocalDate.now().plusMonths(1).plusDays(5),
+            LocalTime.now(),
+            false
+        ),
     )
 
     fun getEmptyList() = listOf<BaseListItem>()

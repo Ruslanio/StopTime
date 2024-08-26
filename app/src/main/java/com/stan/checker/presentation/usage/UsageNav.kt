@@ -3,7 +3,7 @@ package com.stan.checker.presentation.usage
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
+import com.stan.checker.core.navigation.composableNoAnim
 
 const val ROUTE_USAGE = "ROUTE_USAGE"
 
@@ -12,7 +12,7 @@ fun NavController.navigateToUsage(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.usageScreen() {
-    composable(route = ROUTE_USAGE) {
+    composableNoAnim(route = ROUTE_USAGE) {
         UsageScreen()
     }
 }
