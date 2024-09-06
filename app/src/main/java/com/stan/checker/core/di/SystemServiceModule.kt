@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.pm.PackageManager
+import androidx.work.WorkManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,5 +23,10 @@ object SystemServiceModule {
     @Provides
     fun providePackageManager(@ApplicationContext context: Context): PackageManager {
         return context.packageManager
+    }
+
+    @Provides
+    fun provideWorkManager(@ApplicationContext context: Context): WorkManager {
+        return WorkManager.getInstance(context)
     }
 }

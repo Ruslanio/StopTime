@@ -62,6 +62,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.compose)
     implementation(libs.androidx.lifecycle.composeVM)
+    implementation(libs.androidx.workmanager)
     implementation(libs.kotlin.serialization)
 
     implementation(libs.navigation.compose)
@@ -77,6 +78,7 @@ dependencies {
 
     implementation(libs.hilt)
     implementation(libs.hilt.navigation)
+    implementation(libs.hilt.work)
     ksp(libs.hilt.compiler)
 
     implementation(libs.room.ktx)

@@ -1,6 +1,9 @@
 package com.stan.checker.core.di
 
 import android.content.Context
+import androidx.work.WorkManager
+import com.stan.checker.core.workmanager.WorkManagerHelper
+import com.stan.checker.core.workmanager.WorkManagerHelperImpl
 import com.stan.checker.util.date.DateManager
 import com.stan.checker.util.date.DateManagerImpl
 import com.stan.checker.util.resourse.ResourceProvider
@@ -29,5 +32,12 @@ object UtilModule {
         resourceProvider: ResourceProvider
     ): DateManager {
         return DateManagerImpl(resourceProvider)
+    }
+
+    @Provides
+    fun provideWorkManagerHelper(
+        workManager: WorkManager
+    ): WorkManagerHelper {
+        return WorkManagerHelperImpl(workManager)
     }
 }
