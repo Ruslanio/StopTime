@@ -2,7 +2,12 @@ package com.stan.checker.presentation.task.di
 
 import com.stan.checker.domain.mappers.TaskEntityToTaskMapper
 import com.stan.checker.presentation.task.list.mappers.TaskToTaskItemMapper
+import com.stan.checker.presentation.task.validation.TaskDescriptionValidator
+import com.stan.checker.presentation.task.validation.TaskDescriptionValidatorImpl
+import com.stan.checker.presentation.task.validation.TaskTitleValidator
+import com.stan.checker.presentation.task.validation.TaskTitleValidatorImpl
 import com.stan.checker.util.date.DateManager
+import com.stan.checker.util.resourse.ResourceProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,5 +30,21 @@ object TaskModule {
     @ViewModelScoped
     fun provideTaskEntityMapper(): TaskEntityToTaskMapper {
         return TaskEntityToTaskMapper()
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideTaskNameValidator(
+        resourceProvider: ResourceProvider
+    ): TaskTitleValidator {
+        return TaskTitleValidatorImpl(resourceProvider)
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideTaskDescriptionValidator(
+        resourceProvider: ResourceProvider
+    ): TaskDescriptionValidator {
+        return TaskDescriptionValidatorImpl(resourceProvider)
     }
 }

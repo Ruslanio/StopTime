@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterialNavigationApi::class)
+
 package com.stan.checker.presentation.app
 
 import androidx.compose.runtime.Composable
@@ -9,6 +11,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
+import androidx.navigation.plusAssign
+import com.google.accompanist.navigation.material.BottomSheetNavigator
+import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
+import com.google.accompanist.navigation.material.rememberBottomSheetNavigator
 import com.stan.checker.core.navigation.BottomBarScreen
 import com.stan.checker.core.navigation.getHomeDestinations
 import com.stan.checker.presentation.task.list.ROUTE_TASK_LIST
@@ -18,16 +24,19 @@ import com.stan.checker.presentation.usage.navigateToUsage
 
 @Composable
 fun rememberCheckerState(
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    bottomSheetNavigator: BottomSheetNavigator = rememberBottomSheetNavigator()
 ): CheckerAppState {
+    navController.navigatorProvider += bottomSheetNavigator
     return remember(navController) {
-        CheckerAppState(navController)
+        CheckerAppState(navController, bottomSheetNavigator)
     }
 }
 
 @Stable
 class CheckerAppState(
-    val navController: NavHostController
+    val navController: NavHostController,
+    val bottomSheetNavigator: BottomSheetNavigator,
 ) {
 
     val currentDestination: NavDestination?
