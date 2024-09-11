@@ -74,7 +74,7 @@ private fun TaskListContent(
 
     fabViewModel.isVisible.value = listState.isScrollingUp().value
     fabViewModel.onClickAction.value = {
-        //TODO go to task creation
+        navigateToTaskCreation.invoke()
     }
 
     Column(

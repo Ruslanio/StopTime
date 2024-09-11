@@ -75,6 +75,7 @@ dependencies {
 
     implementation(libs.accomponist.permission)
     implementation(libs.accomponist.drawablepainter)
+    implementation(libs.accomponist.navigation)
 
     implementation(libs.hilt)
     implementation(libs.hilt.navigation)

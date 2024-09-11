@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterialNavigationApi::class)
+
 package com.stan.checker.presentation.app
 
 import androidx.compose.animation.AnimatedVisibility
@@ -12,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.stan.checker.core.navigation.CheckerNavHost
 import com.stan.checker.presentation.home.GRAPH_HOME
 import com.stan.checker.presentation.permission.ROUTE_PERMISSION
@@ -62,6 +65,7 @@ fun CheckerApp(
         CheckerNavHost(
             fabViewModel = fabViewModel,
             navController = appState.navController,
+            bottomSheetNavigator = appState.bottomSheetNavigator,
             onBackClick = appState::onBackClick,
             modifier = Modifier
                 .padding(innerPadding),

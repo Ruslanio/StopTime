@@ -6,13 +6,33 @@
     <string name="error_generic_message">Error</string>
     <string name="task_list_empty_warning">No tasks found</string>
     <string name="error_generic_action_title">Something went wrong</string>
+
+    <string name="time_hours_short">hr</string>
+    <string name="time_minutes_short">min</string>
+    <string name="time_seconds_short">sec</string>
+
     <string name="task_list_completed">Completed</string>
     <string name="task_list_expired">Expired</string>
     <string name="task_list_perpetual">Prepetual</string>
     <string name="task_list_today">Today</string>
     <string name="task_list_tomorrow">Tomorrow</string>
     <string name="task_list_nearest_future">Nearest future</string>
-    <string name="time_hours_short">hr</string>
-    <string name="time_minutes_short">min</string>
-    <string name="time_seconds_short">sec</string>
+
+    <string name="task_creation_toolbar_title">Task creation</string>
+    <string name="task_creation_field_name_hint">Name</string>
+    <string name="task_creation_field_description_hint">Description</string>
+    <string name="task_creation_create">Create</string>
+    <string name="task_creation_date_dialog_title">Select Date</string>
+    <string name="task_creation_time_dialog_title">Select Time</string>
+
+    <string name="task_validation_error_name_not_empty">Name must not be empty</string>
+    <string name="task_validation_error_name_min_length">Name length must not be lower than %d</string>
+    <string name="task_validation_error_name_max_length">Name length must not be higher than %d</string>
+    <string name="task_validation_error_description_max_length">Description length must not be higher than %d</string>
+
+    <string name="dialog_generic_ok">OK</string>
+    <string name="dialog_generic_cancel">Cancel</string>
+    <string name="dialog_date_picker_title">Select Date</string>
+    <string name="dialog_date_picker_time_action">Select Time</string>
+
 </resources>
