@@ -43,11 +43,12 @@ fun TaskCreationScreen(
     fabViewModel: FabViewModel = fabViewModel(),
     onBackClick: () -> Unit
 ) {
+    fabViewModel.clearFabInfo()
+
     val state = viewModel.uiState.collectAsStateWithLifecycle()
 
     TaskCreationContent(
         taskCreationState = state.value,
-        fabViewModel = fabViewModel,
         onBackClick = onBackClick,
         taskCreationActions = viewModel
     )
@@ -56,11 +57,9 @@ fun TaskCreationScreen(
 @Composable
 private fun TaskCreationContent(
     taskCreationState: TaskCreationState,
-    fabViewModel: FabViewModel,
     onBackClick: () -> Unit,
     taskCreationActions: TaskCreationActions
 ) {
-    fabViewModel.clearFabInfo()
 
     when (taskCreationState) {
         is TaskCreationState.CreationInProgress ->
