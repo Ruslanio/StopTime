@@ -4,7 +4,10 @@ package com.stan.checker.presentation.app
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -26,11 +29,15 @@ fun CheckerApp(
     appState: CheckerAppState = rememberCheckerState(),
     fabViewModel: FabViewModel = hiltViewModel()
 ) {
-    val isVisible by fabViewModel.isVisible
+    val isFabVisible by fabViewModel.isVisible
 
     Scaffold(
         bottomBar = {
-            if (appState.shouldShowBottomBar) {
+            AnimatedVisibility(
+                visible = appState.shouldShowBottomBar,
+                enter = slideInVertically { it * 2 },
+                exit = slideOutVertically { it * 2 }
+            ) {
                 CheckerBottomBar(
                     destinations = appState.bottomBarScreens,
                     onNavigateToDestination = appState::navigateToBottomBarScreen,
@@ -40,7 +47,7 @@ fun CheckerApp(
         },
         floatingActionButton = {
             AnimatedVisibility(
-                visible = isVisible,
+                visible = isFabVisible,
                 enter = slideInHorizontally { it * 2 },
                 exit = slideOutHorizontally { it * 2 }
             ) {
@@ -56,19 +63,19 @@ fun CheckerApp(
                 }
             }
         }
-    ) { innerPadding ->
+    ) {  innerPadding ->
         val startDestination = if (isPermissionProvided) {
             GRAPH_HOME
         } else {
             ROUTE_PERMISSION
         }
         CheckerNavHost(
-            fabViewModel = fabViewModel,
             navController = appState.navController,
             bottomSheetNavigator = appState.bottomSheetNavigator,
             onBackClick = appState::onBackClick,
             modifier = Modifier
-                .padding(innerPadding),
+                .padding(innerPadding)
+                .fillMaxSize(),
             startDestination = startDestination
         )
     }

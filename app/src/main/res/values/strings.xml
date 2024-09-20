@@ -25,6 +25,13 @@
     <string name="task_creation_date_dialog_title">Select Date</string>
     <string name="task_creation_time_dialog_title">Select Time</string>
 
+    <string name="task_edit_field_description_hint">Add description</string>
+    <string name="task_edit_field_name_hint">Task name</string>
+    <string name="task_edit_action_add_description">Add description</string>
+    <string name="task_edit_action_add_date">Add date</string>
+    <string name="task_edit_completed">Completed</string>
+    <string name="task_edit_not_completed">Not completed</string>
+
     <string name="task_validation_error_name_not_empty">Name must not be empty</string>
     <string name="task_validation_error_name_min_length">Name length must not be lower than %d</string>
     <string name="task_validation_error_name_max_length">Name length must not be higher than %d</string>
