@@ -31,7 +31,7 @@ import com.stan.checker.R
 import com.stan.checker.presentation.app.FabViewModel
 import com.stan.checker.presentation.app.fabViewModel
 import com.stan.checker.ui.components.chips.ActionChip
-import com.stan.checker.ui.components.datepicker.DatePicker
+import com.stan.checker.ui.components.datepicker.DateTimePicker
 import com.stan.checker.ui.components.typography.input.OutlinedTextInput
 import com.stan.checker.util.date.Formatters
 import java.time.LocalDate
@@ -85,7 +85,7 @@ private fun TaskCreationContent(
 
         Column(Modifier.padding(16.dp)) {
             if (shouldShowDatePicker) {
-                DatePicker(
+                DateTimePicker(
                     dateFormatter = Formatters.Date.uiFriendly,
                     onDateSelected = taskCreationActions::onChangeDate,
                     onDismissRequest = { shouldShowDatePicker = false }
