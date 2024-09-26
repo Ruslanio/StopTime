@@ -36,7 +36,7 @@ import com.stan.checker.presentation.model.DateStatus
 import com.stan.checker.presentation.model.TaskItem
 import com.stan.checker.ui.components.checkbox.CheckerCheckBox
 import com.stan.checker.ui.components.chips.ActionChip
-import com.stan.checker.ui.components.datepicker.DatePicker
+import com.stan.checker.ui.components.datepicker.DateTimePicker
 import com.stan.checker.ui.components.typography.input.OutlinedTextInput
 import com.stan.checker.util.date.Formatters
 
@@ -102,7 +102,7 @@ private fun MainInfo(
 
         if (shouldShowDatePicker) {
             // TODO use actual compose date picker when it's available
-            DatePicker(
+            DateTimePicker(
                 initialDate = taskItem.date,
                 initialTime = taskItem.time,
                 title = stringResource(id = R.string.task_creation_date_dialog_title),
