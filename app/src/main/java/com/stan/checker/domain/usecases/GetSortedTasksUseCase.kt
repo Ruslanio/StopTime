@@ -5,6 +5,7 @@ import com.stan.checker.data.repository.TaskRepository
 import com.stan.checker.domain.mappers.TaskEntityToTaskMapper
 import com.stan.checker.domain.model.Task
 import com.stan.checker.domain.model.TaskListSortingResult
+import com.stan.checker.domain.model.TaskType
 import com.stan.checker.util.date.DateManager
 import com.stan.checker.util.date.Formatters
 import kotlinx.coroutines.flow.Flow
@@ -19,7 +20,7 @@ class GetSortedTasksUseCase @Inject constructor(
 ) {
 
     operator fun invoke(): Flow<TaskListSortingResult> {
-        return taskRepository.getAllTasks()
+        return taskRepository.getAllTasksFlow()
             .map { it.map(taskMapper::map) }
             .map { sort(it) }
     }
@@ -34,14 +35,14 @@ class GetSortedTasksUseCase @Inject constructor(
 
         var dateKey: String
         tasks.sortById().forEach { task ->
-            when {
-                task.isCompleted -> completedTasks.add(task)
-                task.date == null -> perpetualTasks.add(task)
-                dateManager.isExpired(task.date, task.time) -> expiredTasks.add(task)
-                dateManager.isToday(task.date) -> todayTasks.add(task)
-                dateManager.isTomorrow(task.date) -> tomorrowTasks.add(task)
-                else -> {
-                    dateKey = getDateKey(task.date)
+            when (task.taskType) {
+                TaskType.COMPLETED -> completedTasks.add(task)
+                TaskType.PERPETUAL -> perpetualTasks.add(task)
+                TaskType.EXPIRED -> expiredTasks.add(task)
+                TaskType.TODAY -> todayTasks.add(task)
+                TaskType.TOMORROW -> tomorrowTasks.add(task)
+                TaskType.NEAR_FUTURE -> {
+                    dateKey = getDateKey(task.date!!)
                     if (nearFutureTasks[dateKey] != null) {
                         nearFutureTasks[dateKey]?.add(task)
                     } else {

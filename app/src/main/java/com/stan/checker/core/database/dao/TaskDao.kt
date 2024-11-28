@@ -54,5 +54,8 @@ interface TaskDao {
     fun queryById(taskId: Int): Flow<TaskEntity>
 
     @Query("SELECT * FROM tasks")
-    fun queryAllTasks(): Flow<List<TaskEntity>>
+    fun queryAllTasksFlow(): Flow<List<TaskEntity>>
+
+    @Query("SELECT * FROM tasks")
+    suspend fun queryAllTasks(): List<TaskEntity>
 }

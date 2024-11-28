@@ -9,5 +9,11 @@ data class Task(
     val description: String?,
     val date: LocalDate?,
     val time: LocalTime?,
-    val isCompleted: Boolean
-)
+    val taskType: TaskType
+) {
+    fun isCompleted() = taskType == TaskType.COMPLETED
+}
+
+enum class TaskType {
+    TODAY, TOMORROW, EXPIRED, COMPLETED, PERPETUAL, NEAR_FUTURE
+}

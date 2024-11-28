@@ -42,4 +42,16 @@
     <string name="dialog_date_picker_title">Select Date</string>
     <string name="dialog_date_picker_time_action">Select Time</string>
 
+    <string name="channel_name">Usage reminders</string>
+    <string name="channel_description">Provides notifications if usage exceeded maximum time limit</string>
+
+    <string name="notification_title_template">%s is wasting your time!</string>
+    <string name="notification_subtitle_template">You still have tasks to complete…</string>
+    <string name="notification_body_tasks_title">There are tasks you can do instead:</string>
+    <string name="notification_body_no_current_tasks_title">You can use this time to plan tasks</string>
+    <string name="notification_body_tasks_today">Planned for today</string>
+    <string name="notification_body_tasks_expired">Expired</string>
+    <string name="notification_body_and_more">And more</string>
+
+
 </resources>

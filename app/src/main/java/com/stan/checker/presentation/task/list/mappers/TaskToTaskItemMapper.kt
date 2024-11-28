@@ -14,7 +14,7 @@ class TaskToTaskItemMapper @Inject constructor(
             id = id,
             title = title,
             description = description,
-            isCompleted = isCompleted,
+            isCompleted = isCompleted(),
             date = date,
             time = time,
             dateStatus = dateManager.getTaskDateStatus(
