@@ -1,6 +1,5 @@
 package com.stan.checker.presentation.task.di
 
-import com.stan.checker.domain.mappers.TaskEntityToTaskMapper
 import com.stan.checker.presentation.task.list.mappers.TaskToTaskItemMapper
 import com.stan.checker.presentation.task.validation.TaskDescriptionValidator
 import com.stan.checker.presentation.task.validation.TaskDescriptionValidatorImpl
@@ -24,12 +23,6 @@ object TaskModule {
         dateManager: DateManager
     ): TaskToTaskItemMapper {
         return TaskToTaskItemMapper(dateManager)
-    }
-
-    @Provides
-    @ViewModelScoped
-    fun provideTaskEntityMapper(): TaskEntityToTaskMapper {
-        return TaskEntityToTaskMapper()
     }
 
     @Provides

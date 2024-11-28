@@ -7,7 +7,7 @@ import java.time.LocalTime
 
 interface TaskRepository {
 
-    fun getAllTasks(): Flow<List<TaskEntity>>
+    fun getAllTasksFlow(): Flow<List<TaskEntity>>
 
     fun getTaskById(taskId: Int): Flow<TaskEntity>
 
@@ -28,4 +28,5 @@ interface TaskRepository {
     suspend fun clearTimeById(taskId: Int)
 
     suspend fun deleteTaskById(taskId: Int)
+    suspend fun getAllTasks(): List<TaskEntity>
 }

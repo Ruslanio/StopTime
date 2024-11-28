@@ -53,7 +53,8 @@ class UsageDataSourceImpl(
                 resultList.add(
                     UsageStatEntity(
                         packageName = it.key,
-                        usageTimestamp = currentAppUsage
+                        usageTimestamp = currentAppUsage,
+                        lastUsedTimestamp = it.value.last().timeStamp
                     )
                 )
             }

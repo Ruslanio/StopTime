@@ -12,9 +12,12 @@ class AppInfoDataSourceImpl(
         return result.getOrNull()
     }
 
-    override fun getApplicationLabel(packageName: String): String {
-        return packageManager.getApplicationLabel(
-            packageManager.getApplicationInfo(packageName, 0)
-        ).toString()
+    override fun getApplicationLabel(packageName: String): String? {
+        val result = runCatching {
+            packageManager.getApplicationLabel(
+                packageManager.getApplicationInfo(packageName, 0)
+            ).toString()
+        }
+        return result.getOrNull()
     }
 }

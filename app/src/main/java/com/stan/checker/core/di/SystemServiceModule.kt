@@ -1,10 +1,11 @@
 package com.stan.checker.core.di
 
 import android.app.Activity
+import android.app.AlarmManager
+import android.app.NotificationManager
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.pm.PackageManager
-import androidx.work.WorkManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,12 +22,17 @@ object SystemServiceModule {
     }
 
     @Provides
-    fun providePackageManager(@ApplicationContext context: Context): PackageManager {
-        return context.packageManager
+    fun provideNotificationManager(@ApplicationContext context: Context): NotificationManager {
+        return context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     }
 
     @Provides
-    fun provideWorkManager(@ApplicationContext context: Context): WorkManager {
-        return WorkManager.getInstance(context)
+    fun provideAlarmManager(@ApplicationContext context: Context): AlarmManager {
+        return context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+    }
+
+    @Provides
+    fun providePackageManager(@ApplicationContext context: Context): PackageManager {
+        return context.packageManager
     }
 }

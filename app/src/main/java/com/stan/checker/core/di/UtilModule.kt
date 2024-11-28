@@ -1,9 +1,12 @@
 package com.stan.checker.core.di
 
+import android.app.AlarmManager
+import android.app.NotificationManager
 import android.content.Context
-import androidx.work.WorkManager
-import com.stan.checker.core.workmanager.WorkManagerHelper
-import com.stan.checker.core.workmanager.WorkManagerHelperImpl
+import com.stan.checker.core.alarmmanager.AlarmHelper
+import com.stan.checker.core.alarmmanager.AlarmHelperImpl
+import com.stan.checker.core.notification.NotificationHelper
+import com.stan.checker.core.notification.NotificationHelperImpl
 import com.stan.checker.util.date.DateManager
 import com.stan.checker.util.date.DateManagerImpl
 import com.stan.checker.util.resourse.ResourceProvider
@@ -35,9 +38,26 @@ object UtilModule {
     }
 
     @Provides
-    fun provideWorkManagerHelper(
-        workManager: WorkManager
-    ): WorkManagerHelper {
-        return WorkManagerHelperImpl(workManager)
+    fun providesAlarmHelper(
+        @ApplicationContext context: Context,
+        alarmManager: AlarmManager
+    ): AlarmHelper {
+        return AlarmHelperImpl(
+            context = context,
+            alarmManager = alarmManager
+        )
+    }
+
+    @Provides
+    fun provideNotificationHelper(
+        @ApplicationContext context: Context,
+        notificationManager: NotificationManager,
+        resourceProvider: ResourceProvider
+    ): NotificationHelper {
+        return NotificationHelperImpl(
+            context = context,
+            notificationManager = notificationManager,
+            resourceProvider = resourceProvider
+        )
     }
 }
